@@ -105,7 +105,7 @@ nod.checks.hasKeys = ->
 # Check the maximum value of some input data
 nod.checks.max = (maximum) ->
   f = (obj) ->
-    if isType obj, 'String' or isType obj, 'Array'
+    if isType(obj, 'String') or isType(obj, 'Array')
       obj.length <= maximum
     else if isType obj, 'Number'
       obj <= maximum
@@ -116,7 +116,7 @@ nod.checks.max = (maximum) ->
 # Check the minimum value of some input data
 nod.checks.min = (minimum) ->
   f = (obj) ->
-    if isType obj, 'String' or isType obj, 'Array'
+    if isType(obj, 'String') or isType(obj, 'Array')
       console.log obj
       obj.length >= minimum
     else if isType obj, 'Number'

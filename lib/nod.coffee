@@ -117,7 +117,6 @@ nod.checks.max = (maximum) ->
 nod.checks.min = (minimum) ->
   f = (obj) ->
     if isType(obj, 'String') or isType(obj, 'Array')
-      console.log obj
       obj.length >= minimum
     else if isType obj, 'Number'
       obj >= minimum

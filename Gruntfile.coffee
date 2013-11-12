@@ -50,6 +50,7 @@ module.exports = (grunt) ->
       src: '<%= yeoman.dist %>/*.js'
       options:
         specs: '<%= yeoman.distTest %>/*.spec.js'
+        vendor: 'node_modules/underscore/underscore.js'
 
     grunt.registerTask 'test', [
       'clean'

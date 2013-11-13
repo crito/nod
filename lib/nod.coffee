@@ -1,5 +1,7 @@
 'use strict'
 
+# Establish the root object, 'window' in the browser, 'global' on the
+# server.
 root = this
 
 # Save the previous value of the `nod` variable, so that it can be restored
@@ -50,8 +52,10 @@ flatten = _.flatten or _flatten
 isType = (obj, type) ->
   Object::toString.call(obj) is '[object ' + type + ']'
 
-# Establish the root object, 'window' in the browser, 'global' on the
-# server.
+# `nod` itself
+# ------------
+
+# Create the `nod` function.
 nod = nod or= ->
   [validators...] = arguments
   (obj) ->

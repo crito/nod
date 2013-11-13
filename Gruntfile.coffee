@@ -31,20 +31,24 @@ module.exports = (grunt) ->
           level: 'error'
     coffee:
       dist:
+        options:
+          sourceMap: true
         files: [
           expand:  true
           cwd:     '<%= yeoman.src %>'
           src:     '{,*/}*.coffee'
           dest:    '<%= yeoman.dist %>'
-          ext:     '.js'
+          ext:     '.js',
         ]
       test:
+        options:
+          sourceMap: true
         files: [
           expand:  true
           cwd:     '<%= yeoman.srcTest %>'
           src:     '{,*/}*.spec.coffee'
           dest:    '<%= yeoman.distTest %>'
-          ext:     '.spec.js'
+          ext:     '.spec.js',
         ]
     jasmine:
       src: '<%= yeoman.dist %>/*.js'

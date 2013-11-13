@@ -1,3 +1,4 @@
 *.js
 dist
+dist.spec
 node_modules

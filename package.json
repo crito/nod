@@ -33,7 +33,8 @@
     "grunt-contrib-jasmine": "~0.5.2",
     "matchdep": "~0.1.2",
     "underscore": "~1.5.2",
-    "coffee-script": "~1.6.3"
+    "coffee-script": "~1.6.3",
+    "grunt-cli": "~0.1.11"
   },
   "engines": {
     "node": ">=0.8.0"
@@ -42,7 +43,7 @@
     "lib": "./dist"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "node_modules/grunt-cli/bin/grunt test"
   },
   "main": "./dist/nod.js"
 }

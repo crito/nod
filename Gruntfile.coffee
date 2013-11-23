@@ -6,7 +6,7 @@ module.exports = (grunt) ->
   grunt.initConfig
     yeoman:
       dist:      'dist'
-      src:       'lib'
+      src:       'src'
       distTest:  'dist.spec'
       srcTest:   'spec'
     clean:

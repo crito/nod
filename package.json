@@ -1,6 +1,29 @@
 {
   "name": "nod",
   "version": "0.0.1",
+  "homepage": "https://github.com/crito/nod",
+  "author": "2013+ Christo Buschek <crito@cryptodrunks.net>",
+  "maintainers": [
+    "Christo Buschek <crito@cryptodrunks.net> (https://github.com/crito)"
+  ],
+  "license": {
+    "type": "MIT"
+  },
+  "badges": {
+    "travis": true,
+    "npm": true,
+    "gittip": "crito"
+  },
+  "keywords": [
+    "validation"
+  ],
+  "bugs": {
+    "url": "https://github.com/crito/nod/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/crito/nod.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.0",
@@ -9,9 +32,17 @@
     "grunt-coffeelint": "0.0.7",
     "grunt-contrib-jasmine": "~0.5.2",
     "matchdep": "~0.1.2",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "coffee-script": "~1.6.3"
   },
   "engines": {
     "node": ">=0.8.0"
-  }
+  },
+  "directories": {
+    "lib": "./dist"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "main": "./dist/nod.js"
 }

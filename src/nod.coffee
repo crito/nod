@@ -1,5 +1,3 @@
-'use strict'
-
 # Establish the root object, 'window' in the browser, 'global' on the
 # server.
 root = this
@@ -91,8 +89,8 @@ types  = ['Object', 'Array', 'String', 'Number', 'Date', 'RegExp', 'Function']
 each(types, ((name) ->
   preposition = if name[0] in vowels then 'an' else 'a'
   nod.checks["#{preposition}#{name}"] = nod.makeCheck(
-    "must be #{preposition} #{name.toLowerCase()}", (obj) ->
-      isType(obj, name))
+    "must be #{preposition} #{name.toLowerCase()}",
+    (obj) -> isType(obj, name))
   ))
 
 # Check if an object has the required proeprties
@@ -145,9 +143,7 @@ nod.checks.prop = (name, validators...) ->
         run = v obj[name]
         if run.length > 0
           memo = false
-          errors.push(map run, (value) ->
-            [name, value].join(': ')
-          )
+          errors.push(map run, (value) -> [name, value].join(': '))
         memo
       ), true
 

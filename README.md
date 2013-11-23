@@ -1,10 +1,13 @@
 # nod
 
+[![Build Status](http://img.shields.io/travis-ci/crito/nod.png?branch=master)](http://travis-ci.org/crito/nod "Check this project's build status on TravisCI")
+[![NPM version](http://badge.fury.io/js/nod.png)](https://npmjs.org/package/nod "View this project on NPM")
+[![Gittip donate button](http://img.shields.io/gittip/crito.png)](https://www.gittip.com/crito/ "Donate weekly to this project using Gittip")
+
 Some functions in JavaScript to support object validation.
 
 After reading the excellent [Functional Javascript](http://functionaljavascript.com/)
-I took the idea of a functional object validator presented in the book. I can
-only recommend the book.
+I took the idea of a functional object validator presented in the book.
 
 ## Requirements
 
@@ -304,3 +307,32 @@ Build nod by running:
     grunt build
 
 That will create all build files in `./dist`.
+
+## Backers
+
+### Maintainers
+
+These amazing people are maintaining this project:
+
+- Christo Buschek <crito@cryptodrunks.net> (https://github.com/crito)
+
+### Sponsors
+
+No sponsors yet! Will you be the first?
+
+[![Gittip donate button](http://img.shields.io/gittip/crito.png)](https://www.gittip.com/crito/ "Donate weekly to this project using Gittip")
+
+### Contributors
+
+These amazing people have contributed code to this project:
+
+- Christo Buschek <crito@cryptodrunks.net> (https://github.com/crito) - [view contributions](https://github.com/crito/nod/commits?author=crito)
+
+[Become a contributor!](https://github.com/crito/nod/blob/master/Contributing.md#files)
+
+## License
+
+Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
+
+Copyright &copy; 2013+ Christo Buschek <crito@cryptodrunks.net>
+(https://github.com/crito)

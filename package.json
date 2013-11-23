@@ -1,6 +1,6 @@
 {
   "name": "nod",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "https://github.com/crito/nod",
   "author": "2013+ Christo Buschek <crito@cryptodrunks.net>",
   "maintainers": [
@@ -34,7 +34,8 @@
     "matchdep": "~0.1.2",
     "underscore": "~1.5.2",
     "coffee-script": "~1.6.3",
-    "grunt-cli": "~0.1.11"
+    "grunt-cli": "~0.1.11",
+    "grunt-release": "~0.6.0"
   },
   "engines": {
     "node": ">=0.8.0"

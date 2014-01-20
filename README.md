@@ -6,15 +6,16 @@
 
 Some functions in JavaScript to support object validation.
 
-After reading the excellent [Functional Javascript](http://functionaljavascript.com/)
-I took the idea of a functional object validator presented in the book.
+This approach is taken from the excellent book
+[Functional Javascript](http://functionaljavascript.com/) by [Michael Fogus](http://fogus.me/).
 
 ## Requirements
 
 If your JavaScript environment doesn't implement ECMAScript 5, then `nod`
 requires [`underscore`](http://underscorejs.org). It relies on a few functions
-such as map that are not available prior to that standard. It uses `underscore`
-in any case if available, otherwise falls back to the native implementations.
+such as `map` or `reduce` that are not available prior to that standard. It
+uses `underscore` in any case if available, otherwise falls back to the native
+implementations.
 
 ## Usage
 

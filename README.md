@@ -3,7 +3,7 @@
 Some functions in JavaScript to support object validation.
 
 [![Build Status](http://img.shields.io/travis-ci/crito/nod.png?branch=master)](http://travis-ci.org/crito/nod "Check this project's build status on TravisCI")
-[![NPM version](http://badge.fury.io/js/nod.png)](https://npmjs.org/package/nod "View this project on NPM")
+[![NPM version](http://badge.fury.io/js/nod-validation.png)](https://npmjs.org/package/nod-validation "View this project on NPM")
 [![Gittip donate button](http://img.shields.io/gittip/crito.png)](https://www.gittip.com/crito/ "Donate weekly to this project using Gittip")
 
 This approach is taken from the excellent book
@@ -309,7 +309,8 @@ You can run all tests by running:
 
     grunt  # or grunt test
 
-Build the `nod` distribution by running:
+Running the tests also builds the distribution. You can do that manually by
+running:
 
     grunt dist
 
@@ -341,5 +342,5 @@ These amazing people have contributed code to this project:
 
 Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
 
-Copyright &copy; 2013+ Christo Buschek <crito@cryptodrunks.net>
+Copyright &copy; 2014+ Christo Buschek <crito@cryptodrunks.net>
 (https://github.com/crito)

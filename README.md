@@ -1,10 +1,10 @@
 # nod
 
+Some functions in JavaScript to support object validation.
+
 [![Build Status](http://img.shields.io/travis-ci/crito/nod.png?branch=master)](http://travis-ci.org/crito/nod "Check this project's build status on TravisCI")
 [![NPM version](http://badge.fury.io/js/nod.png)](https://npmjs.org/package/nod "View this project on NPM")
 [![Gittip donate button](http://img.shields.io/gittip/crito.png)](https://www.gittip.com/crito/ "Donate weekly to this project using Gittip")
-
-Some functions in JavaScript to support object validation.
 
 This approach is taken from the excellent book
 [Functional Javascript](http://functionaljavascript.com/) by [Michael Fogus](http://fogus.me/).

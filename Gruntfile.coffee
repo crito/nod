@@ -6,15 +6,19 @@ module.exports = (grunt) ->
   grunt.initConfig
     yeoman:
       dist:      'dist'
+      build:     './'
       src:       'src'
       distTest:  'dist.spec'
       srcTest:   'spec'
     clean:
       dist: ['<%= yeoman.dist %>', '<%= yeoman.distTest %>']
+      build: ['<%= yeoman.build %>/nod.js',
+              '<%= yeoman.build %>/nod.min.js',
+              '<%= yeoman.build %>/nod.map.js']
     uglify:
       nod:
         files:
-          '<%= yeoman.dist %>/nod.min.js': ['<%= yeoman.dist %>/nod.js']
+          '<%= yeoman.build %>/nod.min.js': ['<%= yeoman.build %>/nod.js']
     coffeelint:
       gruntfile:
         src: 'Gruntfile.coffee'
@@ -50,22 +54,49 @@ module.exports = (grunt) ->
           dest:    '<%= yeoman.distTest %>'
           ext:     '.spec.js',
         ]
+      build:
+        options:
+          sourceMap: true
+        files: [
+          expand:  true
+          cwd:     '<%= yeoman.src %>'
+          src:     '{,*/}*.coffee'
+          dest:    '<%= yeoman.build %>'
+          ext:     '.js',
+        ]
     jasmine:
       src: '<%= yeoman.dist %>/*.js'
       options:
         specs: '<%= yeoman.distTest %>/*.spec.js'
         vendor: 'node_modules/underscore/underscore.js'
+    release:
+      options:
+        tagName: 'v<%= version %>'
+        github:
+          repo: 'crito/nod'
+
+    grunt.registerTask 'dist', [
+      'clean:dist'
+      'coffeelint'
+      'coffee:dist'
+      'coffee:test'
+    ]
 
     grunt.registerTask 'test', [
-      'clean'
-      'coffeelint'
-      'coffee'
+      'dist'
       'jasmine'
     ]
 
     grunt.registerTask 'build', [
       'test'
+      'clean:build'
+      'coffee:build'
       'uglify'
+    ]
+
+    grunt.registerTask 'publish', [
+      'build'
+      'release'
     ]
 
     grunt.registerTask 'default', [

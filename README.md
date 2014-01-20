@@ -309,11 +309,11 @@ You can run all tests by running:
 
     grunt  # or grunt test
 
-Build nod by running:
+Build the `nod` distribution by running:
 
-    grunt build
+    grunt dist
 
-That will create all build files in `./dist`.
+This builds all files in `./dist`.
 
 ## Backers
 

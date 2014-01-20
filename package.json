@@ -1,8 +1,8 @@
 {
-  "name": "nod",
+  "name": "nod-validation",
   "version": "0.1.0",
   "homepage": "https://github.com/crito/nod",
-  "author": "2013+ Christo Buschek <crito@cryptodrunks.net>",
+  "author": "2014+ Christo Buschek <crito@cryptodrunks.net>",
   "maintainers": [
     "Christo Buschek <crito@cryptodrunks.net> (https://github.com/crito)"
   ],

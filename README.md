@@ -17,6 +17,12 @@ such as `map` or `reduce` that are not available prior to that standard. It
 uses `underscore` in any case if available, otherwise falls back to the native
 implementations.
 
+## Installation
+
+    npm install nod-validation
+
+Or see the build instructions further down.
+
 ## Usage
 
 `nod` is fairly simple.

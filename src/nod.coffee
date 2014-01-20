@@ -19,28 +19,28 @@ _ = root._ or= {}
 # ----------------
 
 _each = (obj, iterator, context) ->
-  if nativeReduce and obj.forEach is nativeForEach
+  if nativeForEach and obj.forEach is nativeForEach
     obj.forEach(iterator, context)
 
 _reduce = (obj, iterator, memo, context) ->
   if nativeReduce and obj.reduce is nativeReduce
-    if context then iterator = _.bind iterator, context
-    obj.reduce iterator, memo
+    if context then iterator = _.bind(iterator, context)
+    obj.reduce(iterator, memo)
 
 _every = (obj, iterator, context) ->
   if nativeEvery and obj.every is nativeEvery
-    obj.every iterator, context
+    obj.every(iterator, context)
 
 _map = (obj, iterator, context) ->
   if nativeMap and obj.map is nativeMap
-    obj.map iterator, context
+    obj.map(iterator, context)
 
 _flatten = (input, output) ->
   each input, (value) ->
-    if isType(value, 'Array') then flatten value, output
+    if isType(value, 'Array') then flatten(value, output)
     else output.push(value)
   output
-
+    
 each    = _.each    or _each
 reduce  = _.reduce  or _reduce
 every   = _.every   or _every
@@ -57,10 +57,10 @@ isType = (obj, type) ->
 nod = nod or= ->
   [validators...] = arguments
   (obj) ->
-    reduce validators, ((errs, check) ->
+    reduce validators, (errs, check) ->
       if not check(obj) then errs.push(check.message)
       errs
-    ), []
+    , []
 
 nod.VERSION = '0.0.1'
 
@@ -72,8 +72,7 @@ nod.noConflict = ->
 
 # Use the makeCheck function to create valid checkers for an validator.
 nod.makeCheck = (message, fun) ->
-  f = ->
-    fun.apply(this, arguments)
+  f = -> fun.apply(this, arguments)
   f.message = message
   f
 
@@ -86,12 +85,11 @@ nod.checks = nod.checks or= {}
 vowels = ['A', 'E', 'I', 'O', 'U']
 types  = ['Object', 'Array', 'String', 'Number', 'Date', 'RegExp', 'Function']
 
-each(types, ((name) ->
+each types, (name) ->
   preposition = if name[0] in vowels then 'an' else 'a'
   nod.checks["#{preposition}#{name}"] = nod.makeCheck(
     "must be #{preposition} #{name.toLowerCase()}",
     (obj) -> isType(obj, name))
-  ))
 
 # Check if an object has the required proeprties
 nod.checks.hasKeys = ->
@@ -99,7 +97,7 @@ nod.checks.hasKeys = ->
 
   f = (obj) ->
     every keys, (k) ->
-      obj.hasOwnProperty k
+      obj.hasOwnProperty(k)
 
   f.message = ['Must have values for keys:', keys.join ', '].join ' '
   f
@@ -109,7 +107,7 @@ nod.checks.max = (maximum) ->
   f = (obj) ->
     if isType(obj, 'String') or isType(obj, 'Array')
       obj.length <= maximum
-    else if isType obj, 'Number'
+    else if isType(obj, 'Number')
       obj <= maximum
 
   f.message = ['exceeds the maximum of ' + maximum]
@@ -120,7 +118,7 @@ nod.checks.min = (minimum) ->
   f = (obj) ->
     if isType(obj, 'String') or isType(obj, 'Array')
       obj.length >= minimum
-    else if isType obj, 'Number'
+    else if isType(obj, 'Number')
       obj >= minimum
 
   f.message = ['less than the minimum of ' + minimum]
@@ -132,20 +130,20 @@ nod.checks.prop = (name, validators...) ->
     errors = []
 
     if validators.length is 0 then return true
-    if not isType obj, 'Object'
-      errors.push 'not an object'
+    if not isType(obj, 'Object')
+      errors.push('not an object')
       result = false
-    else if not obj.hasOwnProperty name
+    else if not obj.hasOwnProperty(name)
       errors.push [name, 'not found'].join(': ')
       result = false
     else
-      result = reduce validators, ((memo, v) ->
+      result = reduce validators, (memo, v) ->
         run = v obj[name]
         if run.length > 0
           memo = false
-          errors.push(map run, (value) -> [name, value].join(': '))
+          errors.push(map(run, (value) -> [name, value].join(': ')))
         memo
-      ), true
+      , true
 
     f.message = flatten errors, []
     result
@@ -156,8 +154,7 @@ nod.checks.prop = (name, validators...) ->
 # ------------
 
 if typeof define == 'function' && define.amd
-  define ->
-    nod
+  define -> nod
 else if typeof module isnt 'undefined' and module.exports
   module.exports = nod
 else

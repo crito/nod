@@ -11,9 +11,10 @@ nativeForEach = Array::forEach
 nativeEvery   = Array::every
 nativeMap     = Array::map
 
-# FIXME: find a way to better test for the existence of underscore that
-#        works on node and AMD.
-_ = root._ or= {}
+try
+  _ = require('lodash')
+catch e
+  _ = root._ or {}
 
 # Helper Functions
 # ----------------
@@ -35,11 +36,14 @@ _map = (obj, iterator, context) ->
   if nativeMap and obj.map is nativeMap
     obj.map(iterator, context)
 
-_flatten = (input, output) ->
-  each input, (value) ->
-    if isType(value, 'Array') then flatten(value, output)
-    else output.push(value)
-  output
+_flatten = (ary) ->
+  # Probably this implementation of flatten has potential for a stack overflow.
+  # But ppl should anyway use lodash.
+  _reduce ary, (memo, value) ->
+    if isType(value, 'Array') then memo = memo.concat(_flatten(value))
+    else memo.push(value)
+    memo
+  , []
 
 each    = _.each    or _each
 reduce  = _.reduce  or _reduce
@@ -121,14 +125,14 @@ nod.checks.prop = (name, validators...) ->
     errors = []
 
     if validators.length is 0 then return true
-    if not isType(obj, 'Object')
+    result = if not isType(obj, 'Object')
       errors.push('not an object')
-      result = false
+      false
     else if not obj.hasOwnProperty(name)
       errors.push [name, 'not found'].join(': ')
-      result = false
+      false
     else
-      result = reduce validators, (memo, v) ->
+      reduce validators, (memo, v) ->
         run = v obj[name]
         if run.length > 0
           memo = false
@@ -136,7 +140,7 @@ nod.checks.prop = (name, validators...) ->
         memo
       , true
 
-    f.message = flatten errors, []
+    f.message = flatten errors
     result
   f
 

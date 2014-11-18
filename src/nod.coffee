@@ -58,21 +58,12 @@ isType = (obj, type) ->
 # ------------
 
 # Create the `nod` function.
-nod = nod or= ->
-  [validators...] = arguments
+nod = nod or= (validators...) ->
   (args...) ->
     reduce validators, (errs, check) ->
       if not check.apply(null, args) then errs.push(check.message)
       errs
     , []
-
-nod.VERSION = '0.0.1'
-
-# Run nod.js in `noConflict` mode, returning the `nod` variable to its
-# previous owner. Returns a reference to this `nod` object.
-nod.noConflict = ->
-  root.nod = previousnod
-  return this
 
 # Use the makeCheck function to create valid checkers for an validator.
 nod.makeCheck = (message, fun) ->
@@ -84,7 +75,7 @@ nod.makeCheck = (message, fun) ->
 # ---------------------
 
 # Define a library of common checks
-nod.checks = nod.checks or= {}
+nod.checks = {}
 
 vowels = ['A', 'E', 'I', 'O', 'U']
 types  = ['Object', 'Array', 'String', 'Number', 'Date', 'RegExp', 'Function']
@@ -96,9 +87,7 @@ each types, (name) ->
     (obj) -> isType(obj, name))
 
 # Check if an object has the required proeprties
-nod.checks.hasKeys = ->
-  [keys...] = arguments
-
+nod.checks.hasKeys = (keys...) ->
   f = (obj) -> (every keys, (k) -> obj.hasOwnProperty(k))
   f.message = ['Must have values for keys:', keys.join ', '].join ' '
   f

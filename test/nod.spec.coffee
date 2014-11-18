@@ -10,19 +10,6 @@ describe 'The nod library', ->
   it 'defines the global Nod function', ->
     nod.should.exist()
 
-  xit 'implements a no conflict mode', ->
-    nod2 = nod.noConflict()
-
-    # Since nod wasn't defined before, it should be undefined
-    nod.should.not.exist()
-
-    # Test that the new nod function implements the API
-    _.isFunction(nod2).should.be.true
-    _.isFunction(nod2.makeCheck).should.be.true
-
-    # Restore again the nod object
-    window.nod = nod2
-
 describe 'The nod function', ->
   it 'returns another function', ->
     validator = nod()

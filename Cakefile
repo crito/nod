@@ -112,18 +112,26 @@ actions =
     (next = opts; opts = {}) unless next?
     actions.prepublish opts, safe next, ->
       step1 = ->
-        # Bump version
-        spawn(NPM, ['version', 'patch', '-m', 'Bumped to version %s.'],
+        # add distribution
+        spawn(GIT, ['add', 'nod.js', 'nod.js.map'],
           {stdio: 'inherit', cwd: APP_DIR}).on('close', safe next, step2)
       step2 = ->
-        # npm publish
-        spawn(NPM, ['publish'], {stdio: 'inherit', cwd: APP_DIR})
-          .on('close', safe next, step3)
+        # commit distribution
+        spawn(GIT, ['commit', '-m', "Added new distribution."],
+          {stdio: 'inherit', cwd: APP_DIR}).on('close', safe next, step3)
       step3 = ->
-        # git push origin master
-        spawn(GIT, ['push', 'origin', 'master'],
+        # Bump version
+        spawn(NPM, ['version', 'patch', '-m', 'Bumped to version %s.'],
           {stdio: 'inherit', cwd: APP_DIR}).on('close', safe next, step4)
       step4 = ->
+        # npm publish
+        spawn(NPM, ['publish'], {stdio: 'inherit', cwd: APP_DIR})
+          .on('close', safe next, step5)
+      step5 = ->
+        # git push origin master
+        spawn(GIT, ['push', 'origin', 'master'],
+          {stdio: 'inherit', cwd: APP_DIR}).on('close', safe next, step6)
+      step6 = ->
         # git push tags
         spawn(GIT, ['push', 'origin', '--tags'],
           {stdio: 'inherit', cwd: APP_DIR}).on('close', safe next)

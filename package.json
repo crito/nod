@@ -1,6 +1,6 @@
 {
   "name": "nod-validation",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "homepage": "https://github.com/crito/nod",
   "author": "2014+ Christo Buschek <crito@cryptodrunks.net>",
   "maintainers": [
@@ -37,6 +37,5 @@
     "test": "node_modules/.bin/cake test"
   },
   "main": "./nod.js",
-  "dependencies": {
-  }
+  "dependencies": {}
 }

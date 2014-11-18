@@ -40,7 +40,7 @@ _flatten = (input, output) ->
     if isType(value, 'Array') then flatten(value, output)
     else output.push(value)
   output
-    
+
 each    = _.each    or _each
 reduce  = _.reduce  or _reduce
 every   = _.every   or _every
@@ -56,9 +56,9 @@ isType = (obj, type) ->
 # Create the `nod` function.
 nod = nod or= ->
   [validators...] = arguments
-  (obj) ->
+  (args...) ->
     reduce validators, (errs, check) ->
-      if not check(obj) then errs.push(check.message)
+      if not check.apply(null, args) then errs.push(check.message)
       errs
     , []
 
@@ -95,33 +95,24 @@ each types, (name) ->
 nod.checks.hasKeys = ->
   [keys...] = arguments
 
-  f = (obj) ->
-    every keys, (k) ->
-      obj.hasOwnProperty(k)
-
+  f = (obj) -> (every keys, (k) -> obj.hasOwnProperty(k))
   f.message = ['Must have values for keys:', keys.join ', '].join ' '
   f
 
 # Check the maximum value of some input data
 nod.checks.max = (maximum) ->
   f = (obj) ->
-    if isType(obj, 'String') or isType(obj, 'Array')
-      obj.length <= maximum
-    else if isType(obj, 'Number')
-      obj <= maximum
-
-  f.message = ['exceeds the maximum of ' + maximum]
+    if isType(obj, 'String') or isType(obj, 'Array') then obj.length <= maximum
+    else if isType(obj, 'Number') then obj <= maximum
+  f.message = ["exceeds the maximum of #{maximum}"]
   f
 
 # Check the minimum value of some input data
 nod.checks.min = (minimum) ->
   f = (obj) ->
-    if isType(obj, 'String') or isType(obj, 'Array')
-      obj.length >= minimum
-    else if isType(obj, 'Number')
-      obj >= minimum
-
-  f.message = ['less than the minimum of ' + minimum]
+    if isType(obj, 'String') or isType(obj, 'Array') then obj.length >= minimum
+    else if isType(obj, 'Number') then obj >= minimum
+  f.message = ["less than the minimum #{minimum}"]
   f
 
 # Run checks only against one property of the object

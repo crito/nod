@@ -72,9 +72,11 @@
   nod = nod || (nod = function() {
     var validators;
     validators = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-    return function(obj) {
+    return function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       return reduce(validators, function(errs, check) {
-        if (!check(obj)) {
+        if (!check.apply(null, args)) {
           errs.push(check.message);
         }
         return errs;
@@ -133,7 +135,7 @@
         return obj <= maximum;
       }
     };
-    f.message = ['exceeds the maximum of ' + maximum];
+    f.message = ["exceeds the maximum of " + maximum];
     return f;
   };
 
@@ -146,7 +148,7 @@
         return obj >= minimum;
       }
     };
-    f.message = ['less than the minimum of ' + minimum];
+    f.message = ["less than the minimum " + minimum];
     return f;
   };
 

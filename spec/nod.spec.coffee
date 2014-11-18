@@ -42,6 +42,10 @@ describe 'Validator function', ->
     validator = nod alwaysSucceed
     expect(validator {} ).toEqual([])
 
+  it 'returns an empty array when no check is defined, but data is checked', ->
+    validator = nod()
+    expect(validator {age: 42}).toEqual []
+
 describe 'Checks creation', ->
   it 'can create a check function with message', ->
     checker = nod.makeCheck 'Message', alwaysSucceed

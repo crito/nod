@@ -13,7 +13,6 @@ NPM           = 'npm'
 GIT           = "git"
 APP_DIR       = process.cwd()
 PACKAGE_PATH  = pathUtil.join(APP_DIR, "package.json")
-PACKAGE_DATA  = require(PACKAGE_PATH)
 DOCS_DIR      = pathUtil.join(APP_DIR, "docs")
 DOCS_INPUT    = pathUtil.join(APP_DIR, "src", "*")
 SRC_DIR       = pathUtil.join(APP_DIR, "src")
@@ -121,14 +120,10 @@ actions =
         spawn(NPM, ['publish'], {stdio: 'inherit', cwd: APP_DIR})
           .on('close', safe next, step3)
       step3 = ->
-        # git tag
-        spawn(GIT, ['tag', 'v'+PACKAGE_DATA.version, '-a'],
-          {stdio: 'inherit', cwd: APP_DIR}).on('close', safe next, step4)
-      step4 = ->
         # git push origin master
         spawn(GIT, ['push', 'origin', 'master'],
-          {stdio: 'inherit', cwd: APP_DIR}).on('close', safe next, step5)
-      step5 = ->
+          {stdio: 'inherit', cwd: APP_DIR}).on('close', safe next, step4)
+      step4 = ->
         # git push tags
         spawn(GIT, ['push', 'origin', '--tags'],
           {stdio: 'inherit', cwd: APP_DIR}).on('close', safe next)
